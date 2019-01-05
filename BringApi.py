@@ -9,7 +9,6 @@ class BringApi:
     # to be filled by secrets
     bringUUID = ""
     bringListUUID = ""
-    answerHttpStatus = -1
 
     def __init__(self, uuid, bringuuid, use_login = False):
         if use_login:
