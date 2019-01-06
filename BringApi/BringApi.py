@@ -8,6 +8,8 @@ This inofficial API is based on the reverse engineering by helvete003
 https://github.com/helvete003/bring-api
 Thanks for his work!
 
+For information about Bring! please see getbring.com
+
 Everybody feel free to use it, but without any liability or warranty.
 
 Bring! as a Service and Brand is property of Bring! Labs AG
