@@ -1,7 +1,24 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import requests
+
 """
 This inofficial API is based on the reverse engineering by helvete003
 https://github.com/helvete003/bring-api
+Thanks for his work!
+
+Everybody feel free to use it, but without any liability or warranty.
+
+Bring! as a Service and Brand is property of Bring! Labs AG
+This API was just build because the app is really great and 
+its users want to include it in any part of their life.
+It can be unavailable when ever Bring! Labs decides to publish an official API,
+or want's this API to be disabled.
+
+Until then: Thanks to Bring! Labs for their great service!
+
+Made with ❤  and no ☕ in Germany
 """
 
 class BringApi:
@@ -37,7 +54,6 @@ class BringApi:
     def login(self, email, password):
         params = {'email': email, 'password': password}
         return requests.get(self.bringRestURL+"bringlists",params=params)
-        #return $this->request(self::GET_REQUEST,"bringlists","?email=".$email."&password=".$password);
     
     #return list of items from current list as well as recent items
     def get_items(self):
