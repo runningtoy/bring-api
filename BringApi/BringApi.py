@@ -39,50 +39,49 @@ class BringApi:
         return requests.get(self.bringRestURL+"bringlists",params=params)
         #return $this->request(self::GET_REQUEST,"bringlists","?email=".$email."&password=".$password);
     
+    #return list of items from current list as well as recent items
     def get_items(self):
         return requests.get(self.bringRestURL + "bringlists/"+self.bringListUUID, headers=self.headers)
-        #return $this->request(self::GET_REQUEST,"bringlists/".$this->bringListUUID,"",true);
 
-    def save_item(self, item, specification):
+    #add a new item to the current list with a given specification = additional description
+    def purchase_item(self, item, specification):
         files = {'file': "&purchase="+item+"&recently=&specification="+specification+"&remove=&sender=null"}
-        print(files)
         return requests.put(self.bringRestURL + "bringlists/"+self.bringListUUID, files=files, headers=self.addheaders)
-        #return $this->request(self::PUT_REQUEST,"bringlists/".$this->bringListUUID,"purchase=".$itemName."&recently=&specification=".$specification."&remove=&sender=null",true);
-
+    
+    #add/move something to the recent items
     def recent_item(self, item):
         files = {'file': "&purchase=&recently="+item+"&specification=&remove=&sender=null"}
-        print(files)
         return requests.put(self.bringRestURL + "bringlists/"+self.bringListUUID, files=files, headers=self.addheaders)
 
+    #remove an item completely (from recent and purchase)
     def remove_item(self, item):
         files = {'file': "&purchase=&recently=&specification=&remove="+item+"&sender=null"}
-        print(files)
         return requests.put(self.bringRestURL + "bringlists/"+self.bringListUUID, files=files, headers=self.addheaders)
-        #return $this->request(self::PUT_REQUEST,"bringlists/".$this->bringListUUID, "purchase=&recently=&specification=&remove=".$itemName."&sender=null",true);
 
+    #search for an item in the list
+    # NOT WORKING!
     def search_item(self, search):
         params = {'listUuid': self.bringListUUID, 'itemId': search}
         return requests.get(self.bringRestURL + "bringlistitemdetails/", params=params, headers=self.headers)
-        #return $this->request(self::GET_REQUEST,"bringlistitemdetails/", "?listUuid=".$this->bringListUUID."&itemId=".$search,true);
 
     #// Hidden Icons? Don't know what this is used for
     def load_products(self):
       return requests.get(self.bringRestURL+"bringproducts", headers=self.headers)
-      #return $this->request(self::GET_REQUEST,"bringproducts", "",true);
 
     #// Found Icons? Don't know what this is used for
     def load_features(self):
       return requests.get(self.bringRestURL+"bringusers/"+self.bringUUID+"/features", headers=self.headers)
-      #return $this->request(self::GET_REQUEST,"bringusers/".$this->bringUUID."/features", "",true);
-
+    
+    #load all list infos
     def load_lists(self):
         return requests.get(self.bringRestURL+"bringusers/"+self.bringUUID+"/lists", headers=self.headers)
-        #return $this->request(self::GET_REQUEST,"bringusers/".$this->bringUUID."/lists", "",true);
-
+        
+    #get list of all users in list ID
     def get_users_from_list(self, listUUID):
         return requests.get(self.bringRestURL+"bringlists/"+listUUID+"/users", headers=self.headers)
         #return $this->request(self::GET_REQUEST,"bringlists/".$listUUID."/users", "",true);
 
+    #get settings from user
     def get_user_settings(self):
         return requests.get(self.bringRestURL+"bringusersettings/"+self.bringUUID, headers=self.headers)
         #return $this->request(self::GET_REQUEST,"bringusersettings/".$this->bringUUID, "",true);
