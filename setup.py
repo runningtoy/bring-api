@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="BringApi",
     version="0.0.1",
-    author="Philipp Dürr",
+    author="Philipp Duerr",
     author_email="phil@uselessbrickwall.com",
     description="Unofficial Bring! Api",
     long_description=long_description,
