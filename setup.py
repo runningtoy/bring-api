@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="BringApi",
-    version="0.0.1",
+    version="0.0.2",
     author="Philipp Duerr",
     author_email="phil@uselessbrickwall.com",
     description="Unofficial Bring! Api",
@@ -18,4 +18,5 @@ setuptools.setup(
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Operating System :: OS Independent",
     ],
+    install_requires=["requests"]
 )
