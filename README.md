@@ -7,4 +7,7 @@ PHP version   by helvet003<br/>
 Example: https://twitter.com/HelveteD/status/836262765719347202
 
 Python version  by philipp2310<br/>
-Used in SNIPS for voice Access: https://console.snips.ai/?ref=vOXxdM4DQZ5X
+Used in ProjectAlice voice assistant: https://github.com/project-alice-assistant/ProjectAliceSkills
+
+Node version by foxriver76<br/>
+https://github.com/foxriver76/node-bring-api
