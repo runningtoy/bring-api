@@ -21,6 +21,7 @@ jobs:
         pip install .
         # release and testing dependencies
         pip install twine flake8
+        pip install wheel
     - name: Lint with flake8instance
       run: |
         # stop the build if there are Python syntax errors or undefined names
