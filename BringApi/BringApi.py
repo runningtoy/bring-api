@@ -74,6 +74,11 @@ class BringApi:
 		return items
 
 
+	#return the details: Name, Image, UUID
+	def get_items_detail(self) -> dict:
+		return requests.get(f'{self._bringRestURL}bringlists/{self.bringListUUID}/details', headers=self.headers).json()
+
+
 	#add a new item to the current list with a given specification = additional description
 	def purchase_item(self, item, specification):
 		files = {'file': f'&purchase={item}&recently=&specification={specification}&remove=&sender=null'}
