@@ -18,8 +18,7 @@ https://github.com/foxriver76/node-bring-api
 
 ### Example
 
-'''
-
+```
 from BringApi import BringApi 
 import json
 
@@ -36,5 +35,4 @@ with open('completeShoppinglist.json', 'w', encoding ='utf8') as json_file:
 
 with open('purchaseShoppinglist.json', 'w', encoding ='utf8') as json_file:
     json.dump(shoppinglist["purchase"], json_file,ensure_ascii = True,sort_keys=True)
-
-'''
+```
