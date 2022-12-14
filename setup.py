@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="BringApi",
-    version="0.0.5",
-    author="Philipp Duerr",
-    author_email="phil@uselessbrickwall.com",
+    version="0.1.0",
+    author="Runningtoy",
+    author_email="",
     description="Unofficial Bring! Api",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/philipp2310/bring-api",
+    url="https://github.com/runningtoy/bring-api",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -19,4 +19,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=["requests"]
+    install_requires=["json"]
 )
