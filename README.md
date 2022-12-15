@@ -4,6 +4,7 @@ Fork of Python version  by (philipp2310)[https://github.com/philipp2310/bring-ap
 Incomplete, reverse-engineered and unofficial Bring! API
 
 Updated Version to Api V2
++ getExtendedLocalItems -> extend Item list with Image url
 
 ### Credits
 Reverse Engineering   by helvet003<br/>
@@ -28,7 +29,7 @@ bring.addItem("XXXXXXXX-XXXX-XXXX-XXXX-xxxxxxxxxxxx","Smarthome","python")
 bring.removeItem("XXXXXXXX-XXXX-XXXX-XXXX-xxxxxxxxxxxx","Smarthome","python")
 
 
-shoppinglist=bring.getLocalItems("XXXXXXXX-XXXX-XXXX-XXXX-xxxxxxxxxxxx","de-DE")
+shoppinglist=bring.getExtendedLocalItems("XXXXXXXX-XXXX-XXXX-XXXX-xxxxxxxxxxxx","de-DE")
 
 with open('completeShoppinglist.json', 'w', encoding ='utf8') as json_file:
     json.dump(shoppinglist, json_file,ensure_ascii = True,sort_keys=True)
