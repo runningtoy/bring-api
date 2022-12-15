@@ -32,11 +32,11 @@ class BringApi:
     bringListUUID=""
     bearerToken=""
     refreshToken=""
+    _detailedItems=None
     class AuthentificationFailed(Exception):
         pass
 
     def __init__(self, email, password):
-        print("init")
         try:
             params = {'email': email, 'password': password}
             _headers = {'X-BRING-API-KEY': 'cof4Nc6D8saplXjE3h3HXqHH8m7VU2i1Gs0g85Sp','X-BRING-CLIENT': 'webApp','X-BRING-CLIENT-SOURCE': 'webApp','X-BRING-COUNTRY': 'de','Content-Type':'application/x-www-form-urlencoded; charset=UTF-8' }
@@ -103,11 +103,45 @@ class BringApi:
             for item in items['recently']:
                 item['name'] = self._translations.get(item['name']) or item['name']
         return items
-
+    
+    def search_URL (self,name,listUUID):
+        if(self._detailedItems==None):
+            self._detailedItems=self.getItemsDetails(listUUID)
+        for keyval in self._detailedItems:
+            if name.lower() == keyval['itemId'].lower():
+                return keyval['userIconItemId']
+        return ""
+   
+    #// Get all items from the shopping list
+    def getExtendedLocalItems(self,listUUID,locale=None) -> dict:
+        
+        items=self.getItems(listUUID)
+              
+        for item in items['recently']:
+            item['imageUrl']=self.search_URL(item['name'],listUUID)
+        for item in items['purchase']:
+            item['imageUrl']=self.search_URL(item['name'],listUUID)
+                
+                
+                
+        if locale:
+            self.loadTranslations(locale)
+            for item in items['purchase']:
+                item['name'] = self._translations.get(item['name']) or item['name']
+            for item in items['recently']:
+                item['name'] = self._translations.get(item['name']) or item['name']
+        return items
         
     #// Get all items from the shopping list
     def getItemsDetails(self,listUUID):
-        return requests.get(f'{self._bringRestURL}bringlists/'+listUUID+'/details', headers=self.headers).json()
+        items=requests.get(f'{self._bringRestURL}bringlists/'+listUUID+'/details', headers=self.headers).json()
+        for item in items:
+                if(len(item['userIconItemId'])>0):
+                    item['userIconItemId'] = self.getImageUrl(item['userIconItemId']) or item['userIconItemId']
+                else:
+                    _str=item['itemId']
+                    item['userIconItemId'] = self.getImageUrl(_str[0])
+        return items
         
     #// Get all items from the shopping list
     def loadTranslations(self,locale):
@@ -125,3 +159,19 @@ class BringApi:
     def removeItem(self,listUUID,itemName):
         files = {'file': f'&purchase=&recently=&specification=&remove={itemName}&sender=null'}
         return requests.put(f'{self._bringRestURL}bringlists/'+listUUID,files=files, headers=self.addheaders)
+        
+        
+    def getImageUrl(self,image):
+        url= "https://web.getbring.com/assets/images/items/" + image
+        #url=url.replace(/[.*+-?^${}()|/[\]\\]/g, "_")
+        url=url.lower()
+        url=url.replace('&', "_")
+        url=url.replace('ß', "_")
+        url=url.replace('ä', "ae")
+        url=url.replace('ö', "oe")
+        url=url.replace('ü', "ue")
+        url=url.replace('__', "_")
+        url=url.replace(' ', "_")
+#            .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // è, é
+        url=url + ".png";
+        return url
